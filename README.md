@@ -2,7 +2,7 @@
 
 Navigator is an AI-powered web automation assistant that helps users perform tasks on the web through natural language commands. The application combines a modern React frontend with a Node.js backend and leverages the Anchor Browser API for web automation capabilities.
 
-![Navigator Logo](client/src/assets/navigator.png)
+<img src="client/src/assets/navigator.png" alt="Navigator Logo" width="200" />
 
 ## Features
 
