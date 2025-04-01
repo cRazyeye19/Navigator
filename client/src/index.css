@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* Light mode colors */
+    --color-cerulean-blue: #008adf;
+    --color-light-blue: #3aaaff;
+    --color-ghost-white: #f8f8fe;
+    --color-celadon-green: #2a7f7d;
+
+    /* Dakr mode colors */
+    --color-dark-bg-primary: #212121;
+    --color-dark-bg-secondary: #303030;
+    --color-dark-bg-tertiary: #424242;
+    --color-dark-bg-contrast: #171717;
+}
