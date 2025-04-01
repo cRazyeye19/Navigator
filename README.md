@@ -1,8 +1,8 @@
-# Navigator
+<div align="center">
+  <h1>Navigator <img src="client/src/assets/navigator.png" alt="Navigator Logo" width="50" style="vertical-align: middle;" /></h1>
+</div>
 
 Navigator is an AI-powered web automation assistant that helps users perform tasks on the web through natural language commands. The application combines a modern React frontend with a Node.js backend and leverages the Anchor Browser API for web automation capabilities.
-
-<img src="client/src/assets/navigator.png" alt="Navigator Logo" width="200" />
 
 ## Features
 
@@ -20,12 +20,14 @@ Navigator is an AI-powered web automation assistant that helps users perform tas
 The project is organized into two main components:
 
 ### Client (Frontend)
+
 - Built with React 19, TypeScript, and Vite
 - Uses Tailwind CSS for styling
 - Firebase for authentication and data storage
 - Real-time updates with Firebase hooks
 
 ### Server (Backend)
+
 - Node.js with Express
 - Integrates with Anchor Browser API for web automation
 - Handles task processing and browser session management
@@ -44,28 +46,36 @@ The project is organized into two main components:
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/navigator.git
    cd navigator
 
+   ```
+
 2. Install dependencies for both client and server:
+
    ```bash
     # Install client dependencies
     cd client
     npm install
-    
+
     # Install server dependencies
     cd ../server
     npm install
 
+   ```
+
 3. Set up environment variables:
-Create a .env file in the root directory with the following variables:
+   Create a .env file in the root directory with the following variables:
+
    ```bash
     ANCHOR_API_KEY=your_anchor_api_key
     PORT=3000
     GOOGLE_CREDENTIALS=./config/serviceAccountKey.json
-For the Python test script, you'll also need:
+   For the Python test script, you'll also need:
 
+   ```
 
 4. Set up Firebase:
 
@@ -77,16 +87,21 @@ For the Python test script, you'll also need:
 5. Start the development servers:
 
 In the server directory:
+
 ```bash
 node script.js
 ```
+
 In the client directory:
+
 ```bash
 npm run dev
 ```
+
 6. Open your browser and navigate to http://localhost:5173
 
 ## Usage
+
 1. Sign in with your Firebase account
 2. Type a task in the chat input (e.g., "Search for the latest news about AI")
 3. Click "Send" to submit the task
@@ -95,7 +110,9 @@ npm run dev
 6. Use the dark/light mode toggle in the bottom left corner to change the theme
 
 ## Technologies Used
+
 ### Frontend
+
 - React 19 : Modern UI library for building interactive user interfaces
 - TypeScript : Adds static typing to JavaScript for better code quality
 - Vite : Fast build tool and development server
@@ -107,14 +124,17 @@ npm run dev
 - BoxIcons : Icon library for UI elements
 
 ### Backend
+
 - Node.js : JavaScript runtime for server-side code
 - Express : Web framework for Node.js
 - Firebase Admin SDK : Server-side Firebase integration
 - Anchor Browser API : For web automation and browser control
 - Cors : For handling cross-origin requests
 - Dotenv : For environment variable management
-- 
+-
+
 ### Additional Tools
+
 - ESLint : For code linting and quality control
 - TypeScript ESLint : TypeScript integration for ESLint
 - Python : Alternative implementation with LangChain
@@ -122,20 +142,25 @@ npm run dev
 - Playwright : For browser automation testing
 
 ## How It Works
+
 1. Task Submission : User submits a task through the chat interface
 2. Task Storage : Task is stored in Firebase Firestore
 3. Browser Session : Server creates or reuses an Anchor Browser session
 4. Task Execution : Server sends the task to Anchor Browser for execution
 5. Result Retrieval : Results are fetched and stored in Firestore
 6. Real-time Updates : Client receives updates in real-time via Firebase
+
 ### Browser Session Management
+
 The server manages browser sessions efficiently:
 
 - Reuses existing sessions when available
 - Creates new sessions when needed
 - Handles concurrent requests with a queue system
 - Stores session information in Firestore for persistence
+
 ### Task Processing Flow
+
 1. User submits a task from the client
 2. Task is stored in Firestore with status "pending"
 3. Client sends a request to the server with the task ID
@@ -147,6 +172,7 @@ The server manages browser sessions efficiently:
 9. Client displays the results in real-time via Firebase listeners
 
 ## Contributing
+
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 1. Fork the repository
@@ -154,5 +180,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 3. Commit your changes ( git commit -m 'Add some amazing feature' )
 4. Push to the branch ( git push origin feature/amazing-feature )
 5. Open a Pull Request
+
 ## License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
