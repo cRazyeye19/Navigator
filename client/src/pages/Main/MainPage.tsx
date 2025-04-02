@@ -40,7 +40,15 @@ const MainPage = () => {
 
       setTask("");
 
-      const response = await fetch("http://localhost:3000/perform-web-task", {
+      // const response = await fetch("http://localhost:3000/perform-web-task", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ taskId: docRef.id }),
+      // });
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const response = await fetch(`${apiUrl}/perform-web-task`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -129,7 +137,15 @@ const MainPage = () => {
         photoUrl: user.photoURL,
       });
 
-      const response = await fetch("http://localhost:3000/perform-web-task", {
+      // const response = await fetch("http://localhost:3000/perform-web-task", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ taskId: docRef.id }),
+      // });
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const response = await fetch(`${apiUrl}/perform-web-task`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
