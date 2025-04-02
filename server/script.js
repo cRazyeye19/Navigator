@@ -20,7 +20,14 @@ const app = express();
 const PORT = config.port;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: [
+        "http://localhost:5173",
+        "https://navigator-a2b86.web.app",
+        "https://navigator-a2b86.firebaseapp.com",
+    ],
+    credentials: true,
+}));
 app.use(bodyparser.json());
 
 // Routes
