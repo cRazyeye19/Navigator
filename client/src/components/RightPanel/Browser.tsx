@@ -4,7 +4,8 @@ const Browser = () => {
   const [liveViewUrl, setLiveViewUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/get-live-url")
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+    fetch(`${apiUrl}/get-live-url`)
       .then((response) => response.json())
       .then((data) => {
         setLiveViewUrl(data.live_url);
@@ -17,12 +18,16 @@ const Browser = () => {
   return (
     <>
       {liveViewUrl ? (
-        <iframe
-          src={liveViewUrl}
-          className="size-full"
-        ></iframe>
+        <iframe src={liveViewUrl} className="size-full"></iframe>
       ) : (
-        <p>Loading live view...</p>
+        <div className="size-full flex flex-col p-4 bg-gray-50 dark:bg-dark-bg-secondary animate-pulse">
+          <div className="h-8 bg-gray-200 dark:bg-dark-bg-primary rounded mb-4 w-full"></div>
+          <div className="flex-1 bg-gray-200 dark:bg-dark-bg-primary rounded"></div>
+          <div className="mt-4 flex items-center space-x-2">
+            <div className="h-6 bg-gray-200 dark:bg-dark-bg-primary rounded w-1/4"></div>
+            <div className="h-6 bg-gray-200 dark:bg-dark-bg-primary rounded w-1/2"></div>
+          </div>
+        </div>
       )}
     </>
   );

@@ -4,7 +4,9 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-const API_URL = "http://localhost:3000/perform-web-task";
+const API_URL = `${
+  import.meta.env.VITE_API_URL || "http://localhost:3000"
+}/perform-web-task`;
 
 const ChatInput: React.FC<ChatInputProps> = ({ task }) => {
   const [inputTask, setInputTask] = useState("");
