@@ -4,6 +4,7 @@ import ChatTabs from "./ChatTabs";
 import ChatContent from "./ChatContent";
 import ChatInput from "./ChatInput";
 import Logo from "../../assets/navigator.png";
+import History from "./History";
 
 const ChatPanel: React.FC<ChatPanelProps> = ({
   isPanelVisible,
@@ -27,7 +28,10 @@ const ChatPanel: React.FC<ChatPanelProps> = ({
             Navigator
           </h1>
         </a>
-        <button onClick={() => setIsPanelVisible(!setIsPanelVisible)} className="md:hidden text-sm p-1.5 rounded-lg cursor-pointer text-gray-600 dark:text-gray-500 hover:text-gray-100 dark:hover:bg-dark-bg-secondary">
+        <button
+          onClick={() => setIsPanelVisible(!setIsPanelVisible)}
+          className="md:hidden text-sm p-1.5 rounded-lg cursor-pointer text-gray-600 dark:text-gray-500 hover:text-gray-100 dark:hover:bg-dark-bg-secondary"
+        >
           <i
             className="bx bxs-chevrons-left text-base"
             title="Close Sidebar"
@@ -38,8 +42,15 @@ const ChatPanel: React.FC<ChatPanelProps> = ({
         activeChatTab={activeChatTab}
         setActiveChatTab={setActiveChatTab}
       />
-      <ChatContent tasks={tasks} />
-      <ChatInput task={task} />
+
+      {activeChatTab === "chat" ? (
+        <>
+          <ChatContent tasks={tasks} />
+          <ChatInput task={task} />
+        </>
+      ) : (
+        <History />
+      )}
     </div>
   );
 };

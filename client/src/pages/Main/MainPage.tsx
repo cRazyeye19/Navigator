@@ -330,8 +330,9 @@ const MainPage = () => {
 
             <div className="flex items-center justify-end gap-2">
               <button
-                className="px-2.5 py-2 dark:hover:bg-dark-bg-secondary rounded-full transition-colors cursor-pointer"
-                title="Upload files and more"
+                className="px-2.5 py-2 dark:hover:bg-dark-bg-secondary rounded-full transition-colors cursor-not-allowed opacity-50"
+                title="Upload files and more (Coming Soon)"
+                disabled={true}
               >
                 <i className="bx bx-paperclip size-5 text-gray-400 dark:text-gray-300"></i>
               </button>
