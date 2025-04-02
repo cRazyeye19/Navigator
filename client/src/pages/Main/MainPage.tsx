@@ -297,67 +297,60 @@ const MainPage = () => {
         <span className="typewriter dark:text-white">Welcome to Navigator</span>
       </h1>
 
-      <div className="w-full max-w-2xl bg-gray-100 dark:bg-dark-bg-secondary p-2 rounded-3xl shadow-sm">
-        <form
-          onSubmit={handleSubmit}
-          className="flex items-center bg-ghost-white dark:bg-dark-bg-primary rounded-2xl border-gray-200 mb-2"
-        >
-          {/* <input
-            type="text"
-            placeholder="Perform a task..."
-            className="flex-grow p-3 outline-none text-gray-700 dark:text-white mx-1"
-            value={task}
-            onChange={(e) => setTask(e.target.value)}
-            required
-          /> */}
-          <textarea
-            placeholder="Perform a task..."
-            className="flex-grow p-3 outline-none text-gray-700 dark:text-gray-100 mx-1 resize-none overflow-hidden min-h-[40px] max-h-[120px]"
-            value={task}
-            onChange={(e) => {
-              setTask(e.target.value);
-              e.target.style.height = "auto";
-              e.target.style.height = `${Math.min(
-                e.target.scrollHeight,
-                120
-              )}px`;
-            }}
-            onFocus={(e) => {
-              e.target.style.height = "auto";
-              e.target.style.height = `${Math.min(
-                e.target.scrollHeight,
-                120
-              )}px`;
-            }}
-            rows={1}
-            required
-          ></textarea>
-          <button
-            className="text-gray-400 mx-3 cursor-pointer"
-            title="Attach file"
-            disabled={loading}
-          >
-            <i className="bx bx-paperclip text-base"></i>
-          </button>
-          <button
-            className={`bg-cerulean-blue text-white py-2.5 px-3 rounded-xl flex items-center justify-center mr-1 cursor-pointer ${
-              loading ? "opacity-50" : ""
-            }`}
-            title="Run task"
-            disabled={loading}
-          >
-            <i
-              className={`bx ${
-                loading ? "bx-loader-alt animate-spin" : "bx-chevrons-up"
-              } text-base`}
-            ></i>
-          </button>
-        </form>
+      <div className="w-full max-w-2xl bg-gray-200 dark:bg-dark-bg-secondary rounded-2xl p-4">
+        <form onSubmit={handleSubmit}>
+          <div className="relative">
+            <textarea
+              placeholder="Perform a task..."
+              className="flex-grow w-full p-3 resize-none overflow-hidden bg-gray-50 dark:bg-dark-bg-primary dark:text-gray-100 placeholder-gray-400 outline-none rounded-2xl"
+              value={task}
+              onChange={(e) => {
+                setTask(e.target.value);
+                e.target.style.height = "auto";
+                e.target.style.height = `${Math.min(
+                  e.target.scrollHeight,
+                  120
+                )}px`;
+              }}
+              onFocus={(e) => {
+                e.target.style.height = "auto";
+                e.target.style.height = `${Math.min(
+                  e.target.scrollHeight,
+                  120
+                )}px`;
+              }}
+              rows={1}
+              required
+            ></textarea>
 
-        <p className="text-xs text-gray-500 text-center mb-6">
-          The AI assistant can make mistakes. Consider checking important
-          information.
-        </p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-2">
+              The AI assistant can make mistakes. Consider checking important
+              information.
+            </p>
+
+            <div className="flex items-center justify-end gap-2">
+              <button
+                className="px-2.5 py-2 dark:hover:bg-dark-bg-secondary rounded-full transition-colors cursor-pointer"
+                title="Upload files and more"
+              >
+                <i className="bx bx-paperclip size-5 text-gray-400 dark:text-gray-300"></i>
+              </button>
+              <button
+                className={`px-2.5 py-2 bg-cerulean-blue hover:bg-light-blue rounded-full transition-colors cursor-pointer ${
+                  loading ? "opacity-50" : ""
+                }`}
+                title="Perform Task"
+                disabled={loading}
+              >
+                <i
+                  className={`bx ${
+                    loading ? "bx-loader-alt animate-spin" : "bx-chevrons-up"
+                  } size-5 text-gray-100 text-base`}
+                ></i>
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
 
       <div className="w-full max-w-2xl mt-8">
