@@ -18,8 +18,20 @@ const browserConfiguration = {
     idle_timeout: 30,
 };
 
-const serviceAccountPath = resolve(rootDir, process.env.GOOGLE_CREDENTIALS);
-const serviceAccount = JSON.parse(readFileSync(serviceAccountPath, 'utf8'));
+// const serviceAccountPath = resolve(rootDir, process.env.GOOGLE_CREDENTIALS);
+// const serviceAccount = JSON.parse(readFileSync(serviceAccountPath, 'utf8'));
+let serviceAccount;
+try {
+    if (process.env.GOOGLE_CREDENTIALS && process.env.GOOGLE_CREDENTIALS.startsWith('{')) {
+        serviceAccount = JSON.parse(process.env.GOOGLE_CREDENTIALS);
+    } else {
+        const serviceAccountPath = resolve(rootDir, process.env.GOOGLE_CREDENTIALS);
+        serviceAccount = JSON.parse(readFileSync(serviceAccountPath, 'utf8'));
+    }
+} catch (error) {
+    console.error('Error parsing service account credentials:', error);
+    throw error;
+}
 
 export default {
     port: process.env.PORT || 3000,
