@@ -24,11 +24,6 @@ const Chat: React.FC<{ task: Task }> = ({ task }) => {
         <div className="size-9 shrink-0 rounded-full bg-gray-100 dark:bg-dark-bg-secondary flex items-center justify-center">
           <img src={BotLogo} alt="Bot" className="size-7 rounded-full" />
         </div>
-        {/* <div className="bg-gray-100 dark:bg-dark-bg-secondary px-4 py-2 rounded-lg flex-1 text-gray-600 dark:text-gray-100 text-base max-w-full">
-          <p className="break-words overflow-hidden text-ellipsis w-full">
-            {task.result}
-          </p>
-        </div> */}
         {task.result ? (
           <div className="bg-gray-100 dark:bg-dark-bg-secondary px-4 py-2 rounded-lg flex-1 text-gray-600 dark:text-gray-100 text-base max-w-full">
             <p className="break-words overflow-hidden text-ellipsis w-full">
