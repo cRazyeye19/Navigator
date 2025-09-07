@@ -1,0 +1,61 @@
+// General UI strings
+export const USER_ALT_TEXT = "User";
+export const SUBMIT_BUTTON_TYPE = "submit";
+export const BOT_ALT_TEXT = "Bot";
+export const NO_TASKS_MESSAGE = "No tasks available";
+export const INPUT_PLACEHOLDER = "Perform a task...";
+export const ATTACH_FILE_TITLE = "Attach a file";
+export const STOP_TASK_TITLE = "Stop task";
+export const SEND_TASK_TITLE = "Send task";
+export const STOP_BUTTON_TEXT = "Stop";
+export const SEND_BUTTON_TEXT = "Send";
+export const CLOSE_SIDEBAR_TITLE = "Close Sidebar";
+export const OPEN_SIDEBAR_TITLE = "Open Sidebar";
+export const BROWSER_TAB_TITLE = "Browser";
+export const CONSOLE_TAB_TITLE = "Console";
+export const HISTORY_TITLE = "History";
+export const LIGHT_MODE_TITLE = "Light Mode";
+export const DARK_MODE_TITLE = "Dark Mode";
+export const PROFILE_ALT_TEXT = "Profile";
+export const MY_PROFILE_TEXT = "My Profile";
+export const LOGOUT_TEXT = "Logout";
+export const WELCOME_MESSAGE = "Welcome to Navigator";
+export const AI_ASSISTANT_WARNING = "The AI assistant can make mistakes. Consider checking important information.";
+export const UPLOAD_FILES_TITLE = "Upload files and more (Coming Soon)";
+export const PERFORM_TASK_TITLE = "Perform Task";
+export const SUGGESTED_TASKS_TITLE = "Suggested Automation Tasks";
+export const OR_SEPARATOR_TEXT = "or";
+
+// Icon class names
+export const PAPERCLIP_ICON = "bx bx-paperclip";
+export const CHEVRONS_LEFT_ICON = "bx bxs-chevrons-left";
+export const CHEVRONS_RIGHT_ICON = "bx bxs-chevrons-right";
+export const MESSAGE_SQUARE_DOTS_ICON = "bx bx-message-square-dots";
+export const HISTORY_ICON = "bx bx-history";
+export const SUN_ICON = "bx bx-sun";
+export const MOON_ICON = "bx bx-moon";
+export const WINDOWS_ICON = "bx bx-windows";
+export const TERMINAL_ICON = "bx bx-terminal";
+export const USER_CIRCLE_ICON = "bx bx-user-circle";
+export const LOGOUT_ICON = "bx bx-log-out";
+export const LOADER_ALT_ICON = "bx bx-loader-alt animate-spin";
+export const CHEVRONS_UP_ICON = "bx bx-chevrons-up";
+export const SEARCH_ALT_ICON = "bx bx-search-alt-2";
+export const MOVIE_PLAY_ICON = "bx bx-movie-play";
+export const PAPER_PLANE_ICON = "bx bx-paper-plane";
+export const FOOD_MENU_ICON = "bx bx-food-menu";
+export const BUILDINGS_ICON = "bx bx-buildings";
+export const SHOW_PASSWORD_ICON = "bx bx-show-alt";
+export const HIDE_PASSWORD_ICON = "bx bx-hide";
+
+// Magic numbers/values
+export const AVATAR_SIZE_LARGE = 9;
+export const AVATAR_SIZE_SMALL = 7;
+export const TAB_BORDER_HEIGHT = 0.5;
+export const MAX_WIDTH_AUTH_FORM = 400;
+export const LOGO_SIZE = 12;
+export const PASSWORD_TOGGLE_TOP_POSITION = 55; // percentage
+export const PANEL_WIDTH_DEFAULT = 30; // percentage
+export const MAX_WAIT_TIME_FOR_SESSION_ID = 5000; // milliseconds
+export const PASSWORD_MIN_LENGTH = 6;
+export const TASK_ARRAY_INDEX_ZERO = 0;

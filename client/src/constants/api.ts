@@ -1,0 +1,9 @@
+export const DEFAULT_API_URL = "http://localhost:3000";
+export const PERFORM_WEB_TASK_ENDPOINT = "/perform-web-task";
+export const GET_LIVE_URL_ENDPOINT = "/get-live-url";
+export const CONTENT_TYPE_HEADER = "Content-Type";
+export const APPLICATION_JSON_HEADER = "application/json";
+export const FETCH_LIVE_URL_ERROR_MESSAGE = "Error fetching live view URL:";
+export const LIVE_URL_PROPERTY = "live_url";
+export const ERROR_VERIFYING_CODE = "Error verifying code:";
+export const ERROR_RESETTING_PASSWORD = "Error resetting password:";

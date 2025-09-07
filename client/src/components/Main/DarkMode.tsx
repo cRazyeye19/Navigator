@@ -1,4 +1,5 @@
 import { useDarkMode } from "../../contexts/ThemeContext";
+import { LIGHT_MODE_TITLE, DARK_MODE_TITLE, SUN_ICON, MOON_ICON } from "../../constants/ui";
 
 const DarkMode = () => {
   const context = useDarkMode();
@@ -11,12 +12,12 @@ const DarkMode = () => {
       <button
         onClick={() => setDarkMode(!darkMode)}
         className="flex items-center justify-center size-10 bg-ghost-white dark:bg-dark-bg-primary rounded-full shadow-md hover:shadow-lg dark:hover:bg-dark-bg-secondary transition-shadow cursor-pointer"
-        title={darkMode ? "Light Mode" : "Dark Mode"}
+        title={darkMode ? LIGHT_MODE_TITLE : DARK_MODE_TITLE}
       >
         {darkMode ? (
-          <i className="bx bx-sun text-cerulean-blue dark:text-white"></i>
+          <i className={`${SUN_ICON} text-cerulean-blue dark:text-white`}></i>
         ) : (
-          <i className="bx bx-moon text-cerulean-blue dark:text-white"></i>
+          <i className={`${MOON_ICON} text-cerulean-blue dark:text-white`}></i>
         )}
       </button>
     </div>

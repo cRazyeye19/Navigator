@@ -2,6 +2,7 @@ import React from "react";
 import { Task } from "../../types/tasks";
 import Avatar from "../../assets/cat.png";
 import BotLogo from "../../assets/navigator.png";
+import { USER_ALT_TEXT, BOT_ALT_TEXT, AVATAR_SIZE_LARGE, AVATAR_SIZE_SMALL } from "../../constants/ui";
 
 const Chat: React.FC<{ task: Task }> = ({ task }) => {
   return (
@@ -12,17 +13,17 @@ const Chat: React.FC<{ task: Task }> = ({ task }) => {
             {task.task}
           </p>
         </div>
-        <div className="size-9 shrink-0 rounded-full bg-gray-100 dark:bg-dark-bg-secondary flex items-center justify-center">
+        <div className={`size-${AVATAR_SIZE_LARGE} shrink-0 rounded-full bg-gray-100 dark:bg-dark-bg-secondary flex items-center justify-center`}>
           <img
             src={task.photoUrl || Avatar}
-            alt={task.displayName || "User"}
-            className="size-7 rounded-full"
+            alt={task.displayName || USER_ALT_TEXT}
+            className={`size-${AVATAR_SIZE_SMALL} rounded-full`}
           />
         </div>
       </div>
       <div className="flex gap-3 items-center">
-        <div className="size-9 shrink-0 rounded-full bg-gray-100 dark:bg-dark-bg-secondary flex items-center justify-center">
-          <img src={BotLogo} alt="Bot" className="size-7 rounded-full" />
+        <div className={`size-${AVATAR_SIZE_LARGE} shrink-0 rounded-full bg-gray-100 dark:bg-dark-bg-secondary flex items-center justify-center`}>
+          <img src={BotLogo} alt={BOT_ALT_TEXT} className={`size-${AVATAR_SIZE_SMALL} rounded-full`} />
         </div>
         {task.result ? (
           <div className="bg-gray-100 dark:bg-dark-bg-secondary px-4 py-2 rounded-lg flex-1 text-gray-600 dark:text-gray-100 text-base max-w-full">

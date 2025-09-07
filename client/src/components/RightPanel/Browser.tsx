@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
+import {
+  DEFAULT_API_URL,
+  GET_LIVE_URL_ENDPOINT,
+  FETCH_LIVE_URL_ERROR_MESSAGE,
+  LIVE_URL_PROPERTY,
+} from "../../constants/api";
 
 const Browser = () => {
   const [liveViewUrl, setLiveViewUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
-    fetch(`${apiUrl}/get-live-url`)
+    const apiUrl = import.meta.env.VITE_API_URL || DEFAULT_API_URL;
+    fetch(`${apiUrl}${GET_LIVE_URL_ENDPOINT}`)
       .then((response) => response.json())
       .then((data) => {
-        setLiveViewUrl(data.live_url);
+        setLiveViewUrl(data[LIVE_URL_PROPERTY]);
       })
       .catch((error) => {
-        console.error("Error fetching live view URL:", error);
+        console.error(FETCH_LIVE_URL_ERROR_MESSAGE, error);
       });
   }, []);
 

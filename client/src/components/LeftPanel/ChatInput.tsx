@@ -3,10 +3,42 @@ import { ChatInputProps } from "../../types/chat";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import {
+  DEFAULT_API_URL,
+  PERFORM_WEB_TASK_ENDPOINT,
+  CONTENT_TYPE_HEADER,
+  APPLICATION_JSON_HEADER,
+} from "../../constants/api";
+import {
+  TASKS_COLLECTION,
+  TASK_FIELD,
+  STATUS_FIELD,
+  CREATED_AT_FIELD,
+  USER_ID_FIELD,
+  USER_EMAIL_FIELD,
+  DISPLAY_NAME_FIELD,
+  PHOTO_URL_FIELD,
+  PARENT_TASK_ID_FIELD,
+  PENDING_STATUS,
+} from "../../constants/firestore";
+import {
+  INPUT_PLACEHOLDER,
+  ATTACH_FILE_TITLE,
+  PAPERCLIP_ICON,
+  STOP_TASK_TITLE,
+  SEND_TASK_TITLE,
+  STOP_BUTTON_TEXT,
+  SEND_BUTTON_TEXT,
+  SUBMIT_BUTTON_TYPE,
+} from "../../constants/ui";
+import {
+  TEXT_INPUT_TYPE,
+  ABORT_ERROR_NAME,
+} from "../../constants/auth";
 
 const API_URL = `${
-  import.meta.env.VITE_API_URL || "http://localhost:3000"
-}/perform-web-task`;
+  import.meta.env.VITE_API_URL || DEFAULT_API_URL
+}${PERFORM_WEB_TASK_ENDPOINT}`;
 
 const ChatInput: React.FC<ChatInputProps> = ({ task }) => {
   const [inputTask, setInputTask] = useState("");
@@ -20,21 +52,21 @@ const ChatInput: React.FC<ChatInputProps> = ({ task }) => {
     try {
       // First, create a subtask in Firestore
       setIsSending(true);
-      const taskRef = collection(db, "tasks");
+      const taskRef = collection(db, TASKS_COLLECTION);
 
       const taskData = {
-        task: inputTask,
-        status: "pending",
-        createdAt: serverTimestamp(),
-        userId: user.uid,
-        userEmail: user.email,
-        displayName: user.displayName,
-        photoUrl: user.photoURL,
+        [TASK_FIELD]: inputTask,
+        [STATUS_FIELD]: PENDING_STATUS,
+        [CREATED_AT_FIELD]: serverTimestamp(),
+        [USER_ID_FIELD]: user.uid,
+        [USER_EMAIL_FIELD]: user.email,
+        [DISPLAY_NAME_FIELD]: user.displayName,
+        [PHOTO_URL_FIELD]: user.photoURL,
       };
 
       // Only add parentTaskId if task.id exists
       if (task && task.id) {
-        Object.assign(taskData, { parentTaskId: task.id });
+        Object.assign(taskData, { [PARENT_TASK_ID_FIELD]: task.id });
       }
 
       const docRef = await addDoc(taskRef, taskData);
@@ -45,7 +77,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ task }) => {
       const response = await fetch(API_URL, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          [CONTENT_TYPE_HEADER]: APPLICATION_JSON_HEADER,
         },
         body: JSON.stringify({
           taskId: docRef.id,
@@ -61,7 +93,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ task }) => {
       const data = await response.json();
       console.log("Task result:", data);
     } catch (error: unknown) {
-      if ((error as Error).name === "AbortError") {
+      if ((error as Error).name === ABORT_ERROR_NAME) {
         console.log("Task aborted");
       } else {
         console.log("Error:", error);
@@ -87,8 +119,8 @@ const ChatInput: React.FC<ChatInputProps> = ({ task }) => {
     <div className="p-4 border-t border-gray-200 dark:border-dark-bg-secondary flex gap-2">
       <div className="flex-1 relative">
         <input
-          type="text"
-          placeholder="Perform a task..."
+          type={TEXT_INPUT_TYPE}
+          placeholder={INPUT_PLACEHOLDER}
           className="w-full pl-2 py-2 border dark:text-gray-100 dark:bg-dark-bg-secondary border-gray-200 dark:border-dark-bg-secondary rounded-lg pr-10 focus:outline-none focus:ring-1 focus:ring-cerulean-blue focus:border-transparent dark:placeholder-gray-500"
           value={inputTask}
           onChange={(e) => setInputTask(e.target.value)}
@@ -110,23 +142,23 @@ const ChatInput: React.FC<ChatInputProps> = ({ task }) => {
         ></textarea> */}
         <button
           className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
-          title="Attach a file"
+          title={ATTACH_FILE_TITLE}
         >
-          <i className="bx bx-paperclip text-gray-400"></i>
+          <i className={`${PAPERCLIP_ICON} text-gray-400`}></i>
         </button>
       </div>
       <button
-        type="submit"
+        type={SUBMIT_BUTTON_TYPE}
         className={`px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer ${
           isSending
             ? "bg-red-50 text-red-600 hover:bg-red-100"
             : "bg-cerulean-blue text-white hover:bg-light-blue"
         }`}
         onClick={handleSubmit}
-        title={isSending ? "Stop task" : "Send task"}
+        title={isSending ? STOP_TASK_TITLE : SEND_TASK_TITLE}
         disabled={!inputTask.trim()}
       >
-        {isSending ? "Stop" : "Send"}
+        {isSending ? STOP_BUTTON_TEXT : SEND_BUTTON_TEXT}
       </button>
     </div>
   );

@@ -5,6 +5,29 @@ import { auth } from "../../config/firebase";
 import Logo from "../../assets/navigator.png";
 import { Link, useNavigate } from "react-router-dom";
 import { sendPasswordResetEmail } from "firebase/auth";
+import {
+  AUTH_USER_NOT_FOUND,
+  AUTH_INVALID_EMAIL,
+  USER_NOT_FOUND_ERROR,
+  INVALID_EMAIL_FORMAT_ERROR,
+  GENERIC_ERROR_MESSAGE,
+  PASSWORD_RESET_EMAIL_SENT_MESSAGE,
+  RESET_PASSWORD_TITLE,
+  RESET_PASSWORD_INSTRUCTION,
+  EMAIL_ADDRESS_LABEL,
+  EMAIL_PLACEHOLDER,
+  SEND_RESET_LINK_BUTTON_TEXT,
+  RETURN_TO_SIGN_IN_LINK_TEXT,
+  CHECK_EMAIL_TITLE,
+  CHECK_EMAIL_INSTRUCTION,
+  RETURN_TO_SIGN_IN_BUTTON_TEXT,
+  EMAIL_INPUT_TYPE,
+  NAME_INPUT_TYPE,
+} from "../../constants/auth";
+import { HOME_ROUTE, AUTH_SIGN_IN_ROUTE } from "../../constants/routes";
+import { NAVIGATOR_LOGO_ALT, NAVIGATOR_TITLE } from "../../constants/app";
+import { MAX_WIDTH_AUTH_FORM, LOGO_SIZE, SUBMIT_BUTTON_TYPE } from "../../constants/ui";
+import { TOAST_OPTIONS } from "../../constants/toast";
 
 const ResetPassword = () => {
   const [email, setEmail] = React.useState("");
@@ -18,64 +41,43 @@ const ResetPassword = () => {
     try {
       await sendPasswordResetEmail(auth, email);
       setIsEmailSent(true);
-      toast.success("Password reset email sent. Please check your inbox.", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        className: "text-sm",
-      });
+      toast.success(PASSWORD_RESET_EMAIL_SENT_MESSAGE, TOAST_OPTIONS);
     } catch (error) {
       const firebaseError = error as FirebaseError;
 
-      if (firebaseError.code === "auth/user-not-found") {
-        setEmailError("User not found. Please check your email.");
-        toast.error("User not found. Please check your email.", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          className: "text-sm",
-        });
-      } else if (firebaseError.code === "auth/invalid-email") {
-        setEmailError("Invalid email format. Please enter a valid email.");
-        toast.error("Invalid email format. Please enter a valid email.", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          className: "text-sm",
-        });
+      if (firebaseError.code === AUTH_USER_NOT_FOUND) {
+        setEmailError(USER_NOT_FOUND_ERROR);
+        toast.error(USER_NOT_FOUND_ERROR, TOAST_OPTIONS);
+      } else if (firebaseError.code === AUTH_INVALID_EMAIL) {
+        setEmailError(INVALID_EMAIL_FORMAT_ERROR);
+        toast.error(INVALID_EMAIL_FORMAT_ERROR, TOAST_OPTIONS);
       } else {
-        setEmailError("An error occurred. Please try again later.");
-        toast.error("An error occurred. Please try again later.", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          className: "text-sm",
-        });
+        setEmailError(GENERIC_ERROR_MESSAGE);
+        toast.error(GENERIC_ERROR_MESSAGE, TOAST_OPTIONS);
       }
       console.error(firebaseError);
     }
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-ghost-white dark:bg-dark-bg-primary">
-      <div className="w-full max-w-[400px] mx-4">
+      <div className={`w-full max-w-[${MAX_WIDTH_AUTH_FORM}px] mx-4`}>
         <Link
-          to="/"
+          to={HOME_ROUTE}
           className="flex items-center justify-center align-middle mb-8"
         >
-          <img src={Logo} alt="Navigator Logo" className="w-12 h-12" />
+          <img src={Logo} alt={NAVIGATOR_LOGO_ALT} className={`w-${LOGO_SIZE} h-${LOGO_SIZE}`} />
           <p className="mx-2 mt-1 text-4xl font-bold text-cerulean-blue">
-            Navigator
+            {NAVIGATOR_TITLE}
           </p>
         </Link>
 
         {!isEmailSent ? (
           <form onSubmit={handleResetPassword} className="space-y-6">
             <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-100 mb-6">
-              Reset Your Password
+              {RESET_PASSWORD_TITLE}
             </h2>
             <p className="text-sm text-center text-gray-400 mb-4">
-              Enter your email address and we'll send you a link to reset your
-              password.
+              {RESET_PASSWORD_INSTRUCTION}
             </p>
 
             <div className="space-y-2">
@@ -83,58 +85,53 @@ const ResetPassword = () => {
                 htmlFor="email"
                 className="block text-sm text-gray-600 dark:text-gray-100"
               >
-                Email Address
+                {EMAIL_ADDRESS_LABEL}
               </label>
               <input
-                type="email"
-                name=""
+                type={EMAIL_INPUT_TYPE}
+                name={NAME_INPUT_TYPE}
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.address"
+                placeholder={EMAIL_PLACEHOLDER}
                 className="w-full px-3 py-2 dark:text-white border border-gray-200 dark:border-dark-bg-secondary dark:bg-dark-bg-secondary rounded focus:outline-none focus:border-cerulean-blue placeholder-gray-600"
                 required
               />
               {emailError &&
-                toast.error(emailError, {
-                  position: "bottom-right",
-                  autoClose: 3000,
-                  hideProgressBar: true,
-                  className: "text-sm",
-                })}
+                toast.error(emailError, TOAST_OPTIONS)}
             </div>
 
             <button
-              type="submit"
+              type={SUBMIT_BUTTON_TYPE}
               className="w-full bg-cerulean-blue text-white py-2 rounded hover:bg-light-blue transition-colors cursor-pointer"
             >
-              Send Password Reset Link
+              {SEND_RESET_LINK_BUTTON_TEXT}
             </button>
 
             <div className="text-center mt-4">
               <Link
-                to="/auth/signin"
+                to={AUTH_SIGN_IN_ROUTE}
                 className="text-sm text-cerulean-blue hover:no-underline"
               >
-                Return to Sign In
+                {RETURN_TO_SIGN_IN_LINK_TEXT}
               </Link>
             </div>
           </form>
         ) : (
           <div className="text-center space-y-6">
             <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
-              Check your Email
+              {CHECK_EMAIL_TITLE}
             </h2>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              We've sent a password reset link to <strong className="dark:text-gray-100">{email}</strong>.
+              {CHECK_EMAIL_INSTRUCTION} <strong className="dark:text-gray-100">{email}</strong>.
               Please check your inbox and follow the instructions to reset your
               password.
             </p>
             <button
-              onClick={() => navigate("/auth/signin")}
+              onClick={() => navigate(AUTH_SIGN_IN_ROUTE)}
               className="w-full bg-cerulean-blue text-white py-2 rounded hover:no-underline dark:hover:no-underline cursor-pointer mt-4"
             >
-              Return to Sign In
+              {RETURN_TO_SIGN_IN_BUTTON_TEXT}
             </button>
           </div>
         )}

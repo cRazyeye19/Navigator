@@ -21,15 +21,18 @@ async function performWebTask(sessionId, task, taskId) {
     initializeFirebase();
   }
   try {
-    const response = await fetch(`https://connect.anchorbrowser.io/tools/perform-web-task?sessionId=${sessionId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        task: task,
-      })
-    });
+    const response = await fetch(
+      `https://connect.anchorbrowser.io/tools/perform-web-task?sessionId=${sessionId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          task: task,
+        }),
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -41,7 +44,7 @@ async function performWebTask(sessionId, task, taskId) {
     // Update the task document with the result
     await db.collection("tasks").doc(taskId).update({
       result: data.result,
-      updatedAt: admin.firestore.FieldValue.serverTimestamp()
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
     return data.result;
@@ -76,7 +79,7 @@ async function processTask(taskId) {
   await db.collection("tasks").doc(taskId).update({
     status: "processing",
     startedAt: admin.firestore.FieldValue.serverTimestamp(),
-    sessionId: sessionId
+    sessionId: sessionId,
   });
 
   return { sessionId, taskData };

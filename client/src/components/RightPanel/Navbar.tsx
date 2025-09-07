@@ -1,4 +1,15 @@
 import { NavbarProps } from "../../types/chat";
+import {
+  CLOSE_SIDEBAR_TITLE,
+  OPEN_SIDEBAR_TITLE,
+  BROWSER_TAB_TITLE,
+  CONSOLE_TAB_TITLE,
+  CHEVRONS_LEFT_ICON,
+  CHEVRONS_RIGHT_ICON,
+  WINDOWS_ICON,
+  TERMINAL_ICON,
+} from "../../constants/ui";
+import { BROWSER_TAB_NAME, CONSOLE_TAB_NAME } from "../../constants/tasks";
 
 const Navbar: React.FC<NavbarProps> = ({
   activeTab,
@@ -14,37 +25,37 @@ const Navbar: React.FC<NavbarProps> = ({
       >
         {isPanelVisible ? (
           <i
-            className="bx bxs-chevrons-left text-base"
-            title="Close Sidebar"
+            className={`${CHEVRONS_LEFT_ICON} text-base`}
+            title={CLOSE_SIDEBAR_TITLE}
           ></i>
         ) : (
           <i
-            className="bx bxs-chevrons-right text-base"
-            title="Open Sidebar"
+            className={`${CHEVRONS_RIGHT_ICON} text-base`}
+            title={OPEN_SIDEBAR_TITLE}
           ></i>
         )}
       </button>
       <button
-        onClick={() => setActiveTab("browser")}
+        onClick={() => setActiveTab(BROWSER_TAB_NAME)}
         className={`px-3 py-1.5 rounded-lg cursor-pointer flex items-center gap-2 text-sm ${
-          activeTab === "browser"
+          activeTab === BROWSER_TAB_NAME
             ? "bg-gray-100 dark:bg-dark-bg-secondary text-gray-900 dark:text-gray-100"
             : "text-gray-600 dark:text-gray-400 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-dark-bg-secondary"
         }`}
-        title="Browser"
+        title={BROWSER_TAB_TITLE}
       >
-        <i className="bx bx-windows text-base"></i> Browser
+        <i className={`${WINDOWS_ICON} text-base`}></i> Browser
       </button>
       <button
-        onClick={() => setActiveTab("console")}
+        onClick={() => setActiveTab(CONSOLE_TAB_NAME)}
         className={`px-3 py-1.5 rounded-lg cursor-pointer flex items-center gap-2 text-sm ${
-          activeTab === "console"
+          activeTab === CONSOLE_TAB_NAME
             ? "bg-gray-100 dark:bg-dark-bg-secondary text-gray-900 dark:text-gray-100"
             : "text-gray-600 dark:text-gray-400 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-dark-bg-secondary"
         }`}
-        title="Console"
+        title={CONSOLE_TAB_TITLE}
       >
-        <i className="bx bx-terminal text-base"></i> Console
+        <i className={`${TERMINAL_ICON} text-base`}></i> Console
       </button>
     </div>
   );

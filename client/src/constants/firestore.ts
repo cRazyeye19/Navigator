@@ -1,0 +1,11 @@
+export const TASKS_COLLECTION = "tasks";
+export const TASK_FIELD = "task";
+export const STATUS_FIELD = "status";
+export const CREATED_AT_FIELD = "createdAt";
+export const USER_ID_FIELD = "userId";
+export const USER_EMAIL_FIELD = "userEmail";
+export const DISPLAY_NAME_FIELD = "displayName";
+export const PHOTO_URL_FIELD = "photoUrl";
+export const PARENT_TASK_ID_FIELD = "parentTaskId";
+export const SESSION_ID_FIELD = "sessionId";
+export const PENDING_STATUS = "pending";

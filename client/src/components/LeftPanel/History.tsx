@@ -1,6 +1,8 @@
+import { HISTORY_TITLE } from "../../constants/ui";
+
 const History = () => {
   return (
-    <div>History</div>
+    <div>{HISTORY_TITLE}</div>
   )
 }
 

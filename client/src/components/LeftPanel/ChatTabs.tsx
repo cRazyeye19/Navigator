@@ -1,9 +1,11 @@
 import { ChatTabsProps } from "../../types/chat";
+import { CHAT_TAB_NAME, RECORDED_STEPS_TAB_NAME } from "../../constants/tasks";
+import { MESSAGE_SQUARE_DOTS_ICON, HISTORY_ICON, TAB_BORDER_HEIGHT } from "../../constants/ui";
 
 const ChatTabs: React.FC<ChatTabsProps> = ({ activeChatTab, setActiveChatTab }) => {
   return (
     <div className="flex px-4 py-1 border-b border-gray-200 dark:border-dark-bg-secondary">
-      {["chat", "recorded Steps"].map((tab) => (
+      {[CHAT_TAB_NAME, RECORDED_STEPS_TAB_NAME].map((tab) => (
         <button
           key={tab}
           onClick={() => setActiveChatTab(tab)}
@@ -14,15 +16,15 @@ const ChatTabs: React.FC<ChatTabsProps> = ({ activeChatTab, setActiveChatTab }) 
           }`}
         >
           <div className="flex items-center gap-2">
-            {tab === "chat" ? (
-              <i className='bx bx-message-square-dots'></i>
+            {tab === CHAT_TAB_NAME ? (
+              <i className={MESSAGE_SQUARE_DOTS_ICON}></i>
             ) : (
-              <i className='bx bx-history'></i>
+              <i className={HISTORY_ICON}></i>
             )}
             {tab.charAt(0).toUpperCase() + tab.slice(1)}
           </div>
           {activeChatTab === tab && (
-            <div className="absolute bottom-0 left-0 w-full h-0.5 bg-cerulean-blue"></div>
+            <div className={`absolute bottom-0 left-0 w-full h-${TAB_BORDER_HEIGHT} bg-cerulean-blue`}></div>
           )}
         </button>
       ))}
