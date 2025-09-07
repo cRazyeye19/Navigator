@@ -66,3 +66,6 @@ logs
 *.tmp
 *.temp
 .cache/
+
+# Kilocode
+.kilocode/
